@@ -119,101 +119,103 @@ class Cracker():
     def crack(self):
         # Multi-threaded number rule, digit passwords up to length 10 - USE THIS
         # SUCCESS
-        # print("Numbers rule:")
-        # ts = pcn()
-        # for n in range(10,0,-1):
-        #     if n < 5:
-        #         for perm in product(range(10),repeat=n):
-        #             self._numbers_rule(perm)
-        #     else:
-        #         with multiprocessing.Pool(self.num_processes) as pool:
-        #             for chunk in self.split_iter(product(range(10), repeat=n), chunksize=90000000):
-        #                 pool.map(self._numbers_rule, chunk, chunksize=999999)
-        #             pool.close()
-        #             pool.join()
-        # te = pcn()
-        # # Reports time for execution
-        # time = (te - ts) / pow(10,9)
-        # print(f"Time to complete rule: {time} s")
+        print("Numbers rule:")
+        ts = pcn()
+        for n in range(10,0,-1):
+            if n < 5:
+                for perm in product(range(10),repeat=n):
+                    self._numbers_rule(perm)
+            else:
+                with multiprocessing.Pool(self.num_processes) as pool:
+                    for chunk in self.split_iter(product(range(10), repeat=n), chunksize=90000000):
+                        pool.map(self._numbers_rule, chunk, chunksize=999999)
+                    pool.close()
+                    pool.join()
+        te = pcn()
+        # Reports time for execution
+        time = (te - ts) / pow(10,9)
+        print(f"Time to complete rule: {time} s")
 
         
         # Single-threaded word rule, 1 word passwords - USE THIS
         # SUCCESS
-        # print("One word rule:")
-        # ts = pcn()
-        # with open('dictionary.txt', 'r', encoding='utf-8-sig') as df:
-        #     for line in df:
-        #         line = line.rstrip()
-        #         self._words_rule(line)
-        # te = pcn()
-        # # Reports time for execution
-        # time = (te - ts) / pow(10,9)
-        # print(f"Time to complete rule: {time} s")
+        print("One word rule:")
+        ts = pcn()
+        with open('dictionary.txt', 'r', encoding='utf-8-sig') as df:
+            for line in df:
+                line = line.rstrip()
+                self._words_rule(line)
+        te = pcn()
+        # Reports time for execution
+        time = (te - ts) / pow(10,9)
+        print(f"Time to complete rule: {time} s")
 
 
         # Multithreaded word rule, 2 word passwords - USE THIS
         # SUCCESS
-        # print("2 word rule:")
-        # ts = pcn()
-        # with open('dictionary_two_words.txt', 'r', encoding='utf-8-sig') as df:
-        #     with multiprocessing.Pool(self.num_processes) as pool:
-        #         pool.map(self._words_rule, df.read().splitlines())
-        #         pool.close()
-        #         pool.join()
-        # te = pcn()
-        # # Reports time for execution
-        # time = (te - ts) / pow(10,9)
-        # print(f"Time to complete rule: {time} s")
+        print("2 word rule:")
+        ts = pcn()
+        with open('dictionary_two_words.txt', 'r', encoding='utf-8-sig') as df:
+            with multiprocessing.Pool(self.num_processes) as pool:
+                pool.map(self._words_rule, df.read().splitlines())
+                pool.close()
+                pool.join()
+        te = pcn()
+        # Reports time for execution
+        time = (te - ts) / pow(10,9)
+        print(f"Time to complete rule: {time} s")
 
 
         # Multi-threaded word + numbers rule, 1 word passwords - USE THIS
         # SUCCESS
-        # print("1 word + numbers rule:")
-        # ts = pcn()
-        # with open('dictionary.txt', 'r', encoding='utf-8-sig') as df:
-        #     with multiprocessing.Pool(self.num_processes) as pool:
-        #         pool.map(self._word_numbers_rule, df.read().splitlines())
-        #         pool.close()
-        #         pool.join()
-        # te = pcn()
-        # # Reports time for execution
-        # time = (te - ts) / pow(10,9)
-        # print(f"Time to complete rule: {time} s")
-
-
-        # Multithreaded word rule, 3 word passwords - USE THIS
-        # print("3 word rule:")
-        # ts = pcn()
-        # with open('dictionary_two_words.txt', 'r', encoding='utf-8-sig') as dtf:
-        #     with open('dictionary.txt', 'r', encoding='utf-8-sig') as df:
-        #         with multiprocessing.Pool(self.num_processes) as pool:
-        #             count = 1
-        #             for chunk in self.split_iter(product(df.read().splitlines(), dtf.read().splitlines()), chunksize=32000000):
-        #                 print(f"Chunk no. {count}\n")
-        #                 pool.map(self._words_rule_tuple, chunk, chunksize=999999)
-        #                 count += 1
-        #             pool.close()
-        #             pool.join()
-        # te = pcn()
-        # # Reports time for execution
-        # time = (te - ts) / pow(10,9)
-        # print(f"Time to complete rule: {time} s")
+        print("1 word + numbers rule:")
+        ts = pcn()
+        with open('dictionary.txt', 'r', encoding='utf-8-sig') as df:
+            with multiprocessing.Pool(self.num_processes) as pool:
+                pool.map(self._word_numbers_rule, df.read().splitlines())
+                pool.close()
+                pool.join()
+        te = pcn()
+        # Reports time for execution
+        time = (te - ts) / pow(10,9)
+        print(f"Time to complete rule: {time} s")
 
 
         # Multi-threaded word + numbers rule, 2 word passwords
-        # print("2 words + numbers rule:")
-        # ts = pcn()
-        # with open('dictionary_two_words.txt', 'r', encoding='utf-8-sig') as df:
-        #     with multiprocessing.Pool(self.num_processes) as pool:
-        #         for chunk in self.split_iter(df.read().splitlines(), chunksize=15000000):
-        #             pool.map(self._words_numbers_rule, chunk)
-        #         pool.close()
-        #         pool.join()
-        # te = pcn()
-        # # Reports time for execution
-        # time = (te - ts) / pow(10,9)
-        # print(f"Time to complete rule: {time} s")
-        
+        # SUCCESS
+        print("2 words + numbers rule:")
+        ts = pcn()
+        with open('dictionary_two_words.txt', 'r', encoding='utf-8-sig') as df:
+            with multiprocessing.Pool(self.num_processes) as pool:
+                for chunk in self.split_iter(df.read().splitlines(), chunksize=15000000):
+                    pool.map(self._words_numbers_rule, chunk)
+                pool.close()
+                pool.join()
+        te = pcn()
+        # Reports time for execution
+        time = (te - ts) / pow(10,9)
+        print(f"Time to complete rule: {time} s")
+
+
+        # Multithreaded word rule, 3 word passwords - USE THIS
+        # SUCCESS
+        print("3 word rule:")
+        ts = pcn()
+        with open('dictionary_two_words.txt', 'r', encoding='utf-8-sig') as dtf:
+            with open('dictionary.txt', 'r', encoding='utf-8-sig') as df:
+                with multiprocessing.Pool(self.num_processes) as pool:
+                    count = 1
+                    for chunk in self.split_iter(product(df.read().splitlines(), dtf.read().splitlines()), chunksize=32000000):
+                        print(f"Chunk no. {count}\n")
+                        pool.map(self._words_rule_tuple, chunk, chunksize=999999)
+                        count += 1
+                    pool.close()
+                    pool.join()
+        te = pcn()
+        # Reports time for execution
+        time = (te - ts) / pow(10,9)
+        print(f"Time to complete rule: {time} s")
+
 
         # Reports time for execution
         time = (pcn() - self.time_created) / pow(10,9)
